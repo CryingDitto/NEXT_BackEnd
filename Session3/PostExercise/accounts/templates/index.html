@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User</title>
+</head>
+<body>
+    <!-- 유저 아이디, 비밀번호 넘기고 회원가입 -->
+    <h2>회원가입하기</h2>
+    <h3>회원 정보 입력</h3>
+    <label for="signup-username">아이디</label>
+    <input id="signup-username" />
+    <label for="signup-password">비밀번호</label>
+    <input id="signup-password" />
+    <br>
+    <!-- Profile 함께 생성 -->
+    <label for="signup-studentid">학번</label>
+    <input id="signup-studentid" />
+    <label for="signup-name">이름</label>
+    <input id="signup-name" />
+
+
+    <button id="signup-btn">요청 보내기</button>
+    <br />
+    <br />
+    <!-- 존재하는 아이디 비밀번호 넘기고 토큰 받고 쿠키에 저장하기 -->
+    <h3>토큰 받기</h3>
+    <label for="signup-username">아이디</label>
+    <input id="token-username" />
+    <label for="signup-password">비밀번호</label>
+    <input id="token-password" />
+    <button id="create-token-btn">요청 보내기</button>
+
+    <h3>로그인</h3>
+    <!-- id, pw 사실 훼이크 -->
+    <!-- 쿠키의 access_token으로 로그인 -->
+        <label for="signup-username">아이디</label>
+        <input id="login-username" />
+        <label for="signup-password">비밀번호</label>
+        <input id="login-password" />
+        <button id="verify-btn">로그인</button>
+
+    </body>
+    <script src="./index.js">
+    </script>
+</body>
+</html>
