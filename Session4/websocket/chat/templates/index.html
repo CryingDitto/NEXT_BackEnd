@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Rooms</title>
+</head>
+<body>
+
+<div id="connection">not connected</div><br>
+<div id="chat-log"></div> <br>
+<div>sender</div>
+<input id="chat-sender" type="text">
+<div>message</div>
+<input id="chat-message-input" type="text"> <br>
+<input id="chat-message-submit" type="button" value="Send">
+
+<script>
+    // socket instance 생성
+    // 이 경로를 들어가서 새로운 소켓을 만들겠다.
+    // routing.py에 주소 있으므로 어디로 가서 어떤 소켓 인스턴스를 사용해야 할지 알려줌
+    // routing.py가 알려준 주소 따라가서 consumers.py ChatConsumer의 connect가 실행됨
+    let socket = new WebSocket('ws://127.0.0.1:8000' + '/chat/public');
+
+    // socket instance가 열려 있으면 실행할 함수를 onopen으로 정의할 수 있음
+    socket.onopen = function open() {
+        document.querySelector('#connection').innerHTML = "connected"
+    };
+
+
+    //보내기
+    socket.onmessage = (e)=>{
+        const data = JSON.parse(e.data);
+        document.querySelector('#chat-log').innerHTML += (data.sender + " : " + data.message+"\n");
+    }
+
+    document.querySelector('#chat-message-submit').onclick = () => {
+        const messageInputDom = document.querySelector('#chat-message-input');
+        const message = messageInputDom.value;
+        const senderInputDom = document.querySelector('#chat-sender');
+        const sender = senderInputDom.value;
+
+        socket.send(
+            JSON.stringify({
+                "sender" : sender,
+                "message" : message
+            })
+        )
+    }
+
+</script>
+    
+</body>
+
+</html>
